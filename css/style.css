@@ -1,0 +1,27 @@
+body{
+    background-color: #eee;
+    color: #333
+}
+
+nav {
+    padding-left: 50px!important;
+}
+
+main {
+    padding: 50px;
+}
+
+table button {
+    padding: 3px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    margin: 0 5px!important;
+}
+
+.semResultado{
+    text-align: center;
+}
+
+.col-acao {
+    width: 180px;
+}
