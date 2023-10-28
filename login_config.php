@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['usuario_id'] = $row['id']; // Salve o ID do usuário na sessão
 
         // Redirecione para outra página
-        header("Location: funcionario.php");
+        header("Location: index.php");
         exit(); // Encerre o script para evitar execução adicional
     } else {
         echo "Credenciais inválidas. Tente novamente.";

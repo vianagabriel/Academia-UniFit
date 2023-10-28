@@ -1,5 +1,5 @@
 <?php
-include_once("config.php");
+include_once("../config.php");
 
 $linhasTabela = getFuncionarios($conexao);;
 
@@ -30,7 +30,7 @@ function gravaDadosFuncionario($conexao) {
         $result = mysqli_query($conexao, "INSERT INTO funcionario (nome, email, senha, dataCadastro, ativo)
         VALUES('$nome', '$email', '$senha', '$dataCadastro', 1)");
     } else {
-        $sql = "UPDATE funcionario SET nome = '$nome', email = '$email', senha = '$senha', WHERE id = $id";
+        $sql = "UPDATE funcionario SET nome = '$nome', email = '$email', senha = '$senha' WHERE id = $id";
         $result = mysqli_query($conexao, $sql);
     }
     if ($result) {

@@ -12,7 +12,7 @@
 <body>
     <main>
         <div class="container">
-            <form action="loginConfig.php" method="post">
+            <form action="login_config.php" method="post">
                 <div class="email">
                     <label for="">Email</label>
                     <input type="text" name="email" placeholder="Seu email">

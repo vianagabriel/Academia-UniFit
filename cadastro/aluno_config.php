@@ -1,5 +1,5 @@
 <?php
-include_once("config.php");
+include_once("../config.php");
 
 $linhasTabela = getAlunos($conexao);;
 
@@ -30,7 +30,7 @@ function gravaDadosAlunos($conexao) {
         $result = mysqli_query($conexao, "INSERT INTO Alunos (nome, telefone, email, dataCadastro, ativo)
         VALUES('$nome', '$telefone', '$email', '$dataCadastro', 1)");
     } else {
-        $sql = "UPDATE Alunos SET nome = '$nome', telefone = '$telefone', email = '$email', WHERE id = $id";
+        $sql = "UPDATE Alunos SET nome = '$nome', telefone = '$telefone', email = '$email' WHERE id = $id";
         $result = mysqli_query($conexao, $sql);
     }
     if ($result) {
