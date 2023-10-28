@@ -1,7 +1,8 @@
 <?php
 include_once("../config.php");
 
-$linhasTabela = getAlunos($conexao);;
+$linhasTabela = getAlunos($conexao);
+$personais = getPersonal($conexao);
 
 if (isset($_POST["nome"])) {
     gravaDadosAlunos($conexao);
@@ -24,13 +25,14 @@ function gravaDadosAlunos($conexao) {
     $telefone = $_POST["telefone"];
     $email = $_POST["email"];
     $dataCadastro =  date("Y-m-d");
+    $idPersonal = $_POST["idProfessor"];
 
     //Valida se é um cadastro novo ou é para editar
     if ($id == 0) {
-        $result = mysqli_query($conexao, "INSERT INTO Alunos (nome, telefone, email, dataCadastro, ativo)
-        VALUES('$nome', '$telefone', '$email', '$dataCadastro', 1)");
+        $result = mysqli_query($conexao, "INSERT INTO Alunos (nome, telefone, email, dataCadastro, idPersonal, ativo)
+        VALUES('$nome', '$telefone', '$email', '$dataCadastro', '$idPersonal', 1)");
     } else {
-        $sql = "UPDATE Alunos SET nome = '$nome', telefone = '$telefone', email = '$email' WHERE id = $id";
+        $sql = "UPDATE Alunos SET nome = '$nome', telefone = '$telefone', email = '$email', idPersonal = $idPersonal WHERE id = $id";
         $result = mysqli_query($conexao, $sql);
     }
     if ($result) {
@@ -95,6 +97,31 @@ function populaTabela($arrAlunos) {
         }
     } else {
         $linhas = "<td colspan='5' class='semResultado' text='center'>0 Cadastros</td>";
+    }
+
+    return $linhas;
+}
+function getPersonal($conexao) {
+    $sql = "SELECT id, nome FROM funcionario";
+    $result = mysqli_query($conexao, $sql);
+    $arrPersonal = array();
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $arrPersonal[] = $row;
+        }
+
+        // salva as variaveis em uma variavel js para usar no metodo de editar
+        echo "<script>var dadosFuncionario = " . json_encode($arrPersonal) . ";</script>";
+    }
+
+    return populaSelect($arrPersonal);
+}
+function populaSelect($arrPersonal) {
+    $linhas = "<option value=\"0\">Selecione</td>";
+    
+    foreach ($arrPersonal as $row) {
+        $linhas .= "<option value=". $row["id"].">" . $row["nome"] . "</td>";
     }
 
     return $linhas;

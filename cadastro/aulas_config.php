@@ -1,8 +1,8 @@
 <?php
 include_once("../config.php");
 
-$linhasTabela = getAulas($conexao);;
-
+$linhasTabela = getAulas($conexao);
+$personais = getPersonal($conexao);
 if (isset($_POST["nome"])) {
     gravaDados($conexao);
 }
@@ -95,6 +95,31 @@ function populaTabela($arrAlunos) {
         }
     } else {
         $linhas = "<td colspan='5' class='semResultado' text='center'>0 Cadastros</td>";
+    }
+
+    return $linhas;
+}
+function getPersonal($conexao) {
+    $sql = "SELECT * FROM funcionario";
+    $result = mysqli_query($conexao, $sql);
+    $arrPersonal = array();
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $arrPersonal[] = $row;
+        }
+
+        // salva as variaveis em uma variavel js para usar no metodo de editar
+        echo "<script>var dadosFuncionario = " . json_encode($arrPersonal) . ";</script>";
+    }
+
+    return populaSelect($arrPersonal);
+}
+function populaSelect($arrPersonal) {
+    $linhas = "<option value=\"0\">Selecione</td>";
+    
+    foreach ($arrPersonal as $row) {
+        $linhas .= "<option value=". $row["id"].">" . $row["nome"] . "</td>";
     }
 
     return $linhas;

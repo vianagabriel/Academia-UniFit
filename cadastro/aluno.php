@@ -80,6 +80,12 @@ include_once("aluno_config.php");
                             <label for="email">E-mail*</label>
                             <input type="email" id="email" class="form-control" name="email" placeholder="Digite um e-mail" required>
                         </div>
+                        <div class="form-group">
+                            <label for="nome">Professor*</label>
+                            <select id="professor" name="idProfessor" class="form-control">
+                                <?php echo $personais;?>
+                            </select>
+                        </div>
 
                         <!-- IMPORTANTE MANTER O class="idCadastro"-->
                         <input type="text" class="idCadastro" name="id" value="0" hidden>

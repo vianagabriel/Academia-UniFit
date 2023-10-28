@@ -11,6 +11,7 @@ $(function () {
       $('input[type=email]').val("")
       $('input[type=number]').val("")
       $('input[type=password]').val("")
+      $('input[type=select]').val(0)
     }
   
     $(".idCadastro").val(idModal)
